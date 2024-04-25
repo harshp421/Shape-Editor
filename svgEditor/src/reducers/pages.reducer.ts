@@ -27,9 +27,32 @@ const initialState: PAGES = {
     id: '',
     snapshots: []
 }
+// const undoStack: PAGES[] = [];
+// const redoStack: PAGES[] = [];
 
-const pagesReducer: Reducer<PAGES, PAGE_ACTION> = function (state: PAGES = cloneDeep(initialState), action: PAGE_ACTION): PAGES {
+const pagesReducer: Reducer<PAGES, PAGE_ACTION> = function (
+    state: PAGES = cloneDeep(initialState), 
+    action: PAGE_ACTION): PAGES {
+        
+    //       // Push current state to undo stack
+    // const pushToUndoStack = (currentState: PAGES) => {
+    //     if(currentState === state)
+    //         {
+    //             return
+    //         }
+    //         else
+    //         {
+    //             undoStack.push(cloneDeep(currentState));
+    //         }
+       
+    // };
 
+    // // Push current state before handling any action
+    // pushToUndoStack(state);
+    
+    //     const pushToRedoStack = () => {
+    //         redoStack.push(cloneDeep(state));
+    //     };
     function updateSnapshotOfCurrentPage() {
         const currentPageSnapshot = document.getElementById('svgEditor')?.innerHTML!;
         state.snapshots[state.activePageIndex] = currentPageSnapshot;
@@ -175,6 +198,24 @@ const pagesReducer: Reducer<PAGES, PAGE_ACTION> = function (state: PAGES = clone
             // setting these shapes as active shapes
             currentPage.activeShapes = Object.keys(shapesToPaste);
             return { ...state };
+        }
+        
+        //undo and redu 
+        case PAGES_ACTION_TYPES.REDU_SELECTED_SHAPES: {
+             
+            // if (redoStack.length > 0) {
+            //     pushToUndoStack(state);
+            //     return redoStack.pop()!;
+            // }
+            return {...state};
+        }
+        case PAGES_ACTION_TYPES.UNDO_SELECTED_SHAPES: {
+            //  console.log(undoStack,"unfo");
+            // if (undoStack.length > 0) {
+            //     pushToRedoStack();
+            //     return undoStack.pop()!;
+            // }
+            return state;
         }
 
         case PAGES_ACTION_TYPES.REMOVE_SELECTED_SHAPES: {
@@ -400,7 +441,9 @@ const pagesReducer: Reducer<PAGES, PAGE_ACTION> = function (state: PAGES = clone
         }
 
         case PAGES_ACTION_TYPES.UPDATE_CURRENT_PAGE_SNAPSHOT as any: {
+            // pushToUndoStack(state);
             updateSnapshotOfCurrentPage();
+           
             return { ...state };
         }
 

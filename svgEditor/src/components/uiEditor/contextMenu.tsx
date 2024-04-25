@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../../store/store';
 import { getContextMenuState, getActiveShapesInfo, getClipBoard } from '../../selector/selector';
 import { CONTEXT_MENU_INTERFACE } from '../../actions/pages/pages.interface';
-import { toggleContextMenu, cutSelectedShapes, pasteSelectedShape, copySelectedShapes, removeSelectedShapes, saveSelectedShapesAsGroup } from '../../actions/pages/pages.actions';
+import { toggleContextMenu, cutSelectedShapes, pasteSelectedShape, copySelectedShapes, removeSelectedShapes, saveSelectedShapesAsGroup, undoShape, redoShape } from '../../actions/pages/pages.actions';
 import { AVAILABLE_SHAPES } from '../../shapes/availableShapes';
 
 
@@ -26,6 +26,7 @@ const ContextMenu: React.FC = function () {
             icon: FaCut,
             action() {
                 dispatch(cutSelectedShapes())
+               
             }
         },
         {
@@ -60,6 +61,22 @@ const ContextMenu: React.FC = function () {
                 dispatch(removeSelectedShapes());
             }
         },
+        {
+            name: 'undo',
+            disabled: false,
+            icon: MdDelete,
+            action() {
+                dispatch(undoShape());
+            }
+        }
+        ,{
+            name: 'redo',
+            disabled: false,
+            icon: MdDelete,
+            action() {
+                dispatch(redoShape());
+            }
+        }
     ];
 
     if (!show) {

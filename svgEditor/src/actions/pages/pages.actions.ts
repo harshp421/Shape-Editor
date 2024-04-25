@@ -61,7 +61,9 @@ import {
     CREATE_NEW_FILE_ACTION,
     CREATE_NEW_FILE_PAYLOAD,
     EDIT_SVG_STYLE_ACTION,
-    EDIT_SVG_STYLE_PAYLOAD
+    EDIT_SVG_STYLE_PAYLOAD,
+    REDU_SELECTED_SHAPES_ACTION,
+    UNDO_SELECTED_SHAPES_ACTION
 } from "./pages.interface";
 import { getImageDefaultProps } from "../../shapes/image";
 import { getLineDefaultProps } from "../../shapes/line";
@@ -160,6 +162,14 @@ export const copySelectedShapes: () => COPY_SELECTED_SHAPES_ACTION = () => {
 
 export const removeSelectedShapes: () => REMOVE_SELECTED_SHAPES_ACTION = () => {
     return { type: PAGES_ACTION_TYPES.REMOVE_SELECTED_SHAPES, payload: undefined };
+}
+//UNDO AND REDO
+export const redoShape:() => REDU_SELECTED_SHAPES_ACTION = () => {
+    return { type: PAGES_ACTION_TYPES.REDU_SELECTED_SHAPES, payload: undefined };
+}
+
+export const undoShape:() => UNDO_SELECTED_SHAPES_ACTION = () => {
+    return { type: PAGES_ACTION_TYPES.UNDO_SELECTED_SHAPES, payload: undefined };
 }
 
 export const saveSelectedShapesAsGroup: () => SAVE_SELECTED_SHAPES_AS_GROUP_ACTION = () => {
