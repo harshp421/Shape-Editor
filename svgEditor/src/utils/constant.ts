@@ -15,7 +15,8 @@ export enum SHAPE_TYPES {
     TEXT = 'TEXT',
     PAN = 'Pan',
     GROUP = 'Group',
-    IMAGE = 'FaImage'
+    IMAGE = 'FaImage',
+    TRIANGLE = 'TRIANGLE'
 };
 
 export enum HELPERS {
